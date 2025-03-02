@@ -2,7 +2,7 @@
 
 import { FlameIcon, HomeIcon, PlaySquareIcon } from 'lucide-react'
 import React from 'react'
-import Section from './Section'
+import Section from './section'
 
 const routes = [
   {

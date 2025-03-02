@@ -1,13 +1,6 @@
 'use client'
 
-import {
-  FlameIcon,
-  HistoryIcon,
-  HomeIcon,
-  ListVideoIcon,
-  PlaySquareIcon,
-  ThumbsUpIcon,
-} from 'lucide-react'
+import { HistoryIcon, ListVideoIcon, ThumbsUpIcon } from 'lucide-react'
 import React from 'react'
 import Section from './Section'
 

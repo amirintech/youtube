@@ -8,6 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
+import { useAuth, useClerk } from '@clerk/nextjs'
 import Link from 'next/link'
 import React from 'react'
 
@@ -22,20 +23,30 @@ interface Props {
 }
 
 const Section = ({ routes, title }: Props) => {
+  const clerk = useClerk()
+  const { isSignedIn } = useAuth()
+
+  const onAuthRequiredActionClick = (e: React.MouseEvent, auth?: boolean) => {
+    if (!isSignedIn && auth) {
+      e.preventDefault()
+      clerk.openSignIn()
+    }
+  }
+
   return (
     <SidebarGroup>
       {title && <SidebarGroupLabel>{title}</SidebarGroupLabel>}
 
       <SidebarGroupContent>
         <SidebarMenu>
-          {routes.map(({ icon: Icon, title, url }) => {
+          {routes.map(({ icon: Icon, title, url, auth }) => {
             return (
               <SidebarMenuItem key={url}>
                 <SidebarMenuButton
                   asChild
                   tooltip={title}
                   isActive={false}
-                  onClick={() => {}}
+                  onClick={(e) => onAuthRequiredActionClick(e, auth)}
                 >
                   <Link
                     href={url}
